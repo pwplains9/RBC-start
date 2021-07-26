@@ -1,7 +1,7 @@
 /* global трекер yaCounter с файла по установке аналитики yaCounter#######*/
 
 import scrollDepth from 'scroll-depth';
-import router from './router';
+import router from './router'; // подключается с файла router.js
 
 const $window = $(window);
 const $document = $(document);
@@ -29,7 +29,7 @@ function virtualHit(path) {
 }
 
 function clearText(text) {
-	return text.toString().trim().replace(/\s+/, ' ');
+	return text.toString().trim().replace(/\s+/, ' '); // функция для чистки текста от пробелов и прочего мусора.
 }
 
 jQuery.scrollDepth({
@@ -70,6 +70,11 @@ $('.header__rbc').on('click', () => {
 $document.on('slider-change', () => {
 	ga('send', 'event', 'article', 'slider change');
 });
+
+$('.element').on('click', (event) => { // пример обработки события клика
+	const $this = $(e.currentTarget); // получаем элемент клика
+	ga('send', 'event', 'event', 'событие с аналитики', clearText($this.text())); // передаем текст в событие
+})
 
 // test
 
