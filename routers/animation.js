@@ -15,7 +15,7 @@ function enter(page) {
 
         }
 
-		gsap.from($body, 0.3, {
+	gsap.from($body, 0.3, {
             onComplete: resolve,
             opacity: 0,
             clearProps: 'all',
