@@ -10,14 +10,14 @@ const router = new Router({
 	onEnter(prevState, curState) {
 		window.scrollTo(0, 0);
 
-		helpers.setPage(curState.route.name);
+		helpers.setPage(curState.route.name, curState.params.id);
 
-		return animation.enter(curState.route.name);
+		return animation.enter(curState.route.name, curState.params.id);
 	},
 
 	onLeave(curState) {
 		if (curState.route) {
-			return animation.leave(curState.route.name);
+			return animation.leave(curState.route.name, curState.params.id);
 		}
 
 		return Promise.resolve();
@@ -38,6 +38,11 @@ router.addRoute({
 
 router.addRoute({
 	path: '/article',
+	name: 'article',
+});
+
+router.addRoute({
+	path: '/article/:id',
 	name: 'article',
 });
 
