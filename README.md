@@ -16,6 +16,73 @@ import gsap from 'gsap';
 <br>
 window.gsap = gsap;
 
+
+<br>
+<b>4)</b> В папке routers можно найти <b>animations.js</b> в котором есть 2 функции анимации.
+<br>
+enter/leave они отвечают за переходы между страницами.
+<br>
+В каждой из этих функций нужно инициализировать\убирать функции которые относятся к нужным страницам.
+
+<hr>
+
+page - это страница которую получает функция из роутера (файл router.js)
+<br>
+if (page === 'article') {
+<br>
+} else if (page === 'details') {
+<br>
+} else if (page === 'test') {
+<br>
+}
+<br>
+if (num) {
+<br>
+$page = $(`[data-page="${page}-${num}"]`);
+<br>
+}
+<br>
+В этом примере показывается создание страниц с вложенной категорией.
+
+<hr>
+<b>Пример страницы:</b>
+<br>
+.article(data-page="article") // если страница 1 - site.ru/article
+<br>
+.article(data-page="article-1") // если есть вложенные страницы категории  - site.ru/article/1
+
+<hr>
+
+Для перехода по роутингу в ссылки, добавляем дата-атрибут - <b>data-router-link</b>
+
+
+
+<b>5)</b> В файле router.js находится сам роутер.
+<br>
+Для добавления роутера для нужной страницы, используем такую конструкцию:
+<br>
+router.addRoute({
+<br>
+path: '/article',
+<br>
+name: 'article',
+<br>
+});
+<br>
+path - url путь.
+<br>
+name - название страницы "класс самой страницы".
+<br>
+Для создния страниц с вложенностями:
+<br>
+router.addRoute({
+<br>
+path: '/article/:id',
+<br>
+name: 'article',
+<br>
+});
+
 <hr>
 
 Документация Роутинг <a href="https://github.com/ninelines-team/ninelines-router" target="_blank"> клик сюда</a>.
