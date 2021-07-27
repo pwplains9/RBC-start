@@ -1,6 +1,6 @@
 const $body = $('body');
 
-function enter(page) {
+function enter(page, num) {
     return new Promise((resolve) => {
         const $page = $(`.${page}`);
 	    
@@ -28,7 +28,7 @@ function enter(page) {
     });
 }
 
-function leave(page) {
+function leave(page, num) {
     return new Promise((resolve) => {
         const $page = $(`.${page}`);
 	    
