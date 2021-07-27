@@ -3,6 +3,11 @@ const $body = $('body');
 function enter(page) {
     return new Promise((resolve) => {
         const $page = $(`.${page}`);
+	    
+	if (num) {
+		$page = $(`[data-page="${page}-${num}"]`);
+	}
+    
 
         $body.removeClass('is-hidden');
         $page.removeClass('is-hidden');
@@ -26,6 +31,10 @@ function enter(page) {
 function leave(page) {
     return new Promise((resolve) => {
         const $page = $(`.${page}`);
+	    
+	if (num) {
+		$page = $(`[data-page="${page}-${num}"]`);
+	}    
 
         gsap.to($body, 0.3, {
             onComplete() {
