@@ -8,7 +8,6 @@ function enter(page, num) {
 		$page = $(`[data-page="${page}-${num}"]`);
 	}
     
-
         $body.removeClass('is-hidden');
         $page.removeClass('is-hidden');
 
