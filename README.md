@@ -38,7 +38,7 @@ if (page === 'article') {
 <br>
 if (<b>num</b>) {
 <br>
-$page = $(`[data-page="${<b>page</b>}-${<b>num</b>}"]`);
+$page = $(`[data-page="${page}-${num}"]`);
 <br>
 }
 <br>
