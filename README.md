@@ -28,11 +28,11 @@ enter/leave они отвечают за переходы между стран�
 
 <b>page</b> - это страница которую получает функция из роутера (файл router.js)
 <br>
-if (<b>page</b> === 'article') {
+if (page === 'article') {
 <br>
-} else if (<b>page</b> === 'details') {
+} else if (page === 'details') {
 <br>
-} else if (<b>page</b> === 'test') {
+} else if (page === 'test') {
 <br>
 }
 <br>
