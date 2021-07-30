@@ -100,3 +100,29 @@ $document
 	.on('test-reload', () => {
 		ga('send', 'event', 'test', 'resume');
 	});
+
+export const checkBanner = () => {
+	let $banners = $('.js-banner');
+
+	$banners.each((i, banner) => {
+		let $banner = $(banner);
+
+		let bannerTop = $banner.offset().top;
+		let bannerHeight = $banner.height();
+
+		let scrollTop = window.pageYOffset;
+		let scrollTopHeight = scrollTop + window.innerHeight;
+
+		if (scrollTopHeight >= bannerTop && bannerTop + bannerHeight >= scrollTop && !$banner.hasClass('isShown') && bannerTop !== 0) {
+			$banner.addClass('isShown');
+
+			let type = $banner.data('type')
+
+			ga('send', 'event', 'banner', 'show', type, {nonInteraction: true});
+		}
+	});
+};
+
+$(window).on('resize scroll', () => {
+	checkBanner();
+});
