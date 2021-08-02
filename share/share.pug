@@ -1,0 +1,15 @@
+mixin share(data)
+	div(class=`${data}__share`)
+		span(class=`${data}__share__label`) Поделиться:
+		button(data-social="facebook" class=`${data}__share__btn`)
+			+svg('fb')
+			span facebook
+		button(data-social="vk" class=`${data}__share__btn`)
+			+svg('vk')
+			span vkontakte
+		button(data-social="ok" class=`${data}__share__btn`)
+			+svg('od')
+			span odnoklassniki
+		button(data-social="twitter" class=`${data}__share__btn`)
+			+svg('tw')
+			span twitter
