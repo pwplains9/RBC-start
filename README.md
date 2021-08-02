@@ -205,11 +205,11 @@ right\bottom.
 <br>
 prepend vars
 <br>
-<!-- - title = '<?= htmlspecialchars($title) ?>'-->
+- title = '?= htmlspecialchars($title) ?' - обвернуть в <>
 <br>
-<!-- - description = '<?= htmlspecialchars($description) ?>'-->
+- description = '?= htmlspecialchars($description) ?' - обвернуть в <>
 <br>
-<!-- - image = '<?= htmlspecialchars($image) ?>'-->
+- image = '?= htmlspecialchars($image) ?' - обвернуть в <>
 <br>
 Далее, заходим в shareSettings.php и прописываем нужную информацию под каждую страницу.
 <br>
