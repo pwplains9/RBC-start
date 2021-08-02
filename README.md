@@ -237,6 +237,7 @@ prepend vars
 Полную настройку можно посмотреть <a href="https://github.com/ninelines-team/ninelines-docs/blob/master/19_video-js.md" target="_blank">здесь</a>
 <br>
 <hr>
+
 # Анимации при скролле (без кастомного скролла)
 
 На шаблонных проектах используются очень часто простые анимации <b>fade</b>.
