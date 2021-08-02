@@ -1,0 +1,37 @@
+extends pug/base
+
+prepend vars
+	- title = '<?= htmlspecialchars($title) ?>'
+	- description = '<?= htmlspecialchars($description) ?>'
+	- image = '<?= htmlspecialchars($image) ?>'
+
+
+append vars
+	- link.appleTouchIcon180x180 = '/favicon/apple-touch-icon.png'
+	- link.icon32x32 = '/favicon/favicon-32x32.png'
+	- link.icon16x16 = '/favicon/favicon-16x16.png'
+	- link.manifest = '/favicon/site.webmanifest'
+	- link.maskIcon.href = '/favicon/safari-pinned-tab.svg'
+	- link.maskIcon.color = '#5bbad5'
+	- meta.msapplicationTileColor = '#ffffff'
+	- meta.msapplicationTileImage = '/favicon/mstile-144x144.png'
+	- meta.themeColor = '#ffffff'
+	- meta.ogImageType = 'image/jpeg'
+	- meta.ogImageWidth = '1200'
+	- meta.ogImageHeight = '630'
+	- body.classList = ['is-hidden']
+
+block content
+	include pug/data
+
+	.site
+		include pug/components/header
+
+		main.pages
+			include pug/pages/article
+
+			include pug/pages/test
+
+		include pug/components/footer-inner
+
+	include pug/components/analytics
