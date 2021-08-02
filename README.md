@@ -1,5 +1,15 @@
 # RBC-start
 
+# Работа с GIT
+
+Основные комманды.
+
+cd /path/to/your/repo
+git remote add origin https://Ahilko@bitbucket.org/ninelines/rbc-template.git
+git push -u origin master
+
+Описание работы <a href="https://github.com/ninelines-team/ninelines-docs/blob/master/24_git.md" target="_blank">здесь</a>
+
 # Routers
 
 Для начала работы с пакет роутинга.
@@ -214,6 +224,11 @@ prepend vars
 Далее, заходим в shareSettings.php и прописываем нужную информацию под каждую страницу.
 <br>
 <b>Примечание.</b> Не забыть в gulpfile.js поставить в настройку spa:true;
+<br>
+<a href="https://github.com/ninelines-team/ninelines-sharing" target="_blank">Ссылка на пакет</a>
 
-
-
+# Установка видео
+<br>
+На проектах РБК используется video.js плеер.
+<br>
+Полную настройку можно посмотреть <a href="https://github.com/ninelines-team/ninelines-docs/blob/master/19_video-js.md" target="_blank">здесь</a>
