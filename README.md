@@ -2,13 +2,16 @@
 
 # Работа с GIT
 
-Основные комманды.
+<b>Основные комманды.</b>
 
+<br>
 cd /path/to/your/repo
+<br>
 git remote add origin https://Ahilko@bitbucket.org/ninelines/rbc-template.git
+<br>
 git push -u origin master
-
-Описание работы <a href="https://github.com/ninelines-team/ninelines-docs/blob/master/24_git.md" target="_blank">здесь</a>
+<br>
+<b>Описание работы</b> <a href="https://github.com/ninelines-team/ninelines-docs/blob/master/24_git.md" target="_blank">здесь</a>
 
 # Routers
 
