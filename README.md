@@ -2,13 +2,13 @@
 
 # Routers
 
-Для начала работы с библиотеками роутинга.
+Для начала работы с пакет роутинга.
 <br>
 Потребудется:
 <br>
 <b>1)</b> Установить с помощью команды роутинг <b>npm install --save ninelines-router</b>
 <br>
-<b>2)</b> Установить с помощью команды библиотеку анимаций GSAP <b>npm install --save gsap</b>
+<b>2)</b> Установить с помощью команды пакет анимаций GSAP <b>npm install --save gsap</b>
 <br>
 <b>3)</b> В проекте шаблона найти файл <b>vendor.js</b> и подключить глобально GSAP
 
@@ -105,7 +105,7 @@ name: 'article',
 <br>
 <b>4)</b> Подключить файл counters.pug в index.pug в конец страницы
 <br>
-<b>5)</b> Установить в проект библиотеку для просмотра скроллинга страницы <b>npm install scroll-depth --save</b>
+<b>5)</b> Установить в проект пакет для просмотра скроллинга страницы <b>npm install scroll-depth --save</b>
 <br>
 <b>6)</b> В файле <b>analytics.js</b> подготовлена аналитика нативного проекта.
 В Ней есть:
@@ -190,3 +190,30 @@ right\bottom.
 <br>
 б) <b>Телефон >767</b> пишем <b>@include mobile {width: vm(100)}</b>
 <hr>
+
+# Установка Share
+<br>
+1) Нужно установить пакет <b>npm install --save ninelines-sharing</b>
+<br>
+2) В файле <b>share.js</b>, добавлена логика для работы с шерингами.
+<br>
+3) Что бы сделать статичный шеринг для всех страниц. Открываем index.pug и находим 3 строчки. - title \ description \ image и в них прописываем нужную информацию.
+<br>
+4) Что бы сделать динамический шеринг для каждой страницы уникальный. Или же подстроить шеринг под результат теста.
+<br>
+В index.pug должны быть эти 3 строчки.
+<br>
+prepend vars
+<br>
+- title = '<?= htmlspecialchars($title) ?>'
+<br>
+- description = '<?= htmlspecialchars($description) ?>'
+<br>
+- image = '<?= htmlspecialchars($image) ?>'
+<br>
+Далее, заходим в shareSettings.php и прописываем нужную информацию под каждую страницу.
+<br>
+<b>Примечание.</b> Не забыть в gulpfile.js поставить в настройку spa:true;
+
+
+
