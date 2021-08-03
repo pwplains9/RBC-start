@@ -2,12 +2,16 @@
 
 # Работа с GIT
 
+Для копирования проекта нужно зайти в репозиторий, самого проекта.
+Найти кнопку <b>clone</b>
+Скопировать строку -
+<b>git clone</b> url репозитория
 <b>Основные комманды.</b>
 
 <br>
 cd /path/to/your/repo
 <br>
-git remote add origin https://Ahilko@bitbucket.org/ninelines/rbc-template.git
+git remote add origin url репозитория
 <br>
 git push -u origin master
 <br>
@@ -248,6 +252,9 @@ prepend vars
 На проектах РБК используется <b>video.js</b> плеер.
 <br>
 Полную настройку можно посмотреть <a href="https://github.com/ninelines-team/ninelines-docs/blob/master/19_video-js.md" target="_blank">здесь</a>
+Если на проект приходит видео не с ютуба, то нужно сделать мультистриминг.
+Мультристриминг - это создание нескольких дорожек видео с разным качеством. Само качество будет выбираться исходя из скорости интернета у пользователя.
+Докуменатция - <a href="https://github.com/ninelines-team/ninelines-docs/blob/master/20_hls.md">здесь</a>
 <br>
 <hr>
 
