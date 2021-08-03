@@ -11,7 +11,6 @@
 <b>git clone</b> url репозитория
 <br>
 <b>Основные комманды.</b>
-
 <br>
 cd /path/to/your/repo
 <br>
