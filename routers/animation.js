@@ -2,7 +2,7 @@ const $body = $('body');
 
 function enter(page, num) {
     return new Promise((resolve) => {
-        const $page = $(`.${page}`);
+        let $page = $(`.${page}`);
 	    
 	if (num) {
 		$page = $(`[data-page="${page}-${num}"]`);
@@ -29,7 +29,7 @@ function enter(page, num) {
 
 function leave(page, num) {
     return new Promise((resolve) => {
-        const $page = $(`.${page}`);
+        let $page = $(`.${page}`);
 	    
 	if (num) {
 		$page = $(`[data-page="${page}-${num}"]`);
