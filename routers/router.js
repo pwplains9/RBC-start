@@ -33,7 +33,7 @@ const router = new Router({
 
 router.addRoute({
 	path: '/',
-	name: 'home',
+	name: 'home', // класс страницы
 });
 
 router.addRoute({
