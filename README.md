@@ -358,7 +358,7 @@ $(window).on('load', () => {
 <br>
 3) Заходим в инспектор или же открываем код страницы
 <br>
-CTRL + U (COMMAND + OPTION + U в macOS).
+<b>CTRL + U (COMMAND + OPTION + U в macOS).</b>
 <br>
 4) Ищем по общему поиску совпадения
 <br>
