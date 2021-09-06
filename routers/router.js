@@ -41,7 +41,6 @@ barba.hooks.afterEnter((data) => {
 
     console.log(data.next.namespace);
 
-
     if (data.next.namespace === 'название страницы') { // для инициализации скриптов для нужной страницы ипользуем такую конструкцию
 	
     }
