@@ -1,7 +1,7 @@
 extends pug/base
 
 prepend vars
-    - title = 'Title'
+    - title = 'Title' // для шерингов указываем все здесь
     - description = 'description'
     - image = '/images/share/url-image'
 
@@ -16,12 +16,12 @@ append vars
     - meta.msapplicationTileImage = '/favicon/mstile-144x144.png'
     - meta.themeColor = '#ffffff'
     - html.classList = ["theme-black"]
-    - body.attrs = {"data-barba": "wrapper"}
+    - body.attrs = {"data-barba": "wrapper"} // не забываем про добавление этой строчки
 
 block content
-    .page-container(data-barba="container" data-barba-namespace="index")
+    .page-container(data-barba="container" data-barba-namespace="index") // вместо index указываем нужную нам страницу, Этот блок обязательный, без него не будет работать роутинг.
         include pug/components/header
 
         main.main
-            include pug/pages/page
-    include pug/counters
+            include pug/pages/page // подключаем нужную страницу
+    include pug/counters // трекеры аналитики
