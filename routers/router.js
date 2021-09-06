@@ -24,7 +24,7 @@ barba.use(barbaRouter, {
 barba.hooks.enter((data) => {
     vars.$document.trigger(
         'page-enter',
-        [data.current.namespace, data.next.namespace],
+        [data.current.namespace, data.next.namespace], // обработчик для аналитики
     );
 });
 
