@@ -1,61 +1,96 @@
-import {Router} from 'ninelines-router';
+/* global barba, barbaRouter, videojs */
+/* globals scrollDepth */
+import vars from './helpers';
+import analytics from './analytics';
+import lazyLoading from "./components/lazyLoading";
+import share from "./components/share";
+import menu from "./components/header";
 
-import helpers from './helpers';
-import animation from './animation';
+const routes = [ // здесь добавляем роуты страниц
+    {
+        path: '/',
+        name: 'index',
+    },
+    {
+        path: '/article/:id',
+        name: 'article',
+    }
+];
 
-history.scrollRestoration = 'manual';
-
-const router = new Router({
-
-	onEnter(prevState, curState) {
-		window.scrollTo(0, 0);
-
-		helpers.setPage(curState.route.name, curState.params.id);
-
-		return animation.enter(curState.route.name, curState.params.id);
-	},
-
-	onLeave(curState) {
-		if (curState.route) {
-			return animation.leave(curState.route.name, curState.params.id);
-		}
-
-		return Promise.resolve();
-	},
-
-	onNotFound() {
-		router.navigate('/');
-
-		return Promise.resolve();
-	},
-
+barba.use(barbaRouter, {
+    routes,
 });
 
-router.addRoute({
-	path: '/',
-	name: 'home', // класс страницы
+barba.hooks.enter((data) => {
+    vars.$document.trigger(
+        'page-enter',
+        [data.current.namespace, data.next.namespace],
+    );
 });
 
-router.addRoute({
-	path: '/article',
-	name: 'article',
+barba.hooks.beforeEnter(({next}) => {
+    lazyLoading.init();
+    vars.scrollTo(vars.$html, 0);
+    vars.$html.removeClass('no-scroll');
 });
 
-router.addRoute({
-	path: '/article/:id',
-	name: 'article',
+barba.hooks.afterEnter((data) => {
+    scrollDepth.reset(); 
+    analytics.spentOnPage15sec();
+    analytics.init(); // для глобальных фукций инициализируем здесь (Это шеринги, аналитика, меню и т.д)
+
+    console.log(data.next.namespace);
+
+
+    if (data.next.namespace === 'название страницы') { // для инициализации скриптов для нужной страницы ипользуем такую конструкцию
+	
+    }
 });
 
-router.addRoute({
-	path: '/details',
-	name: 'details',
+barba.hooks.afterLeave((data) => {
+    console.log(data.next.namespace);
+
+    // здесь убираем события 
 });
+// init Barba
+barba.init({
+    sync: true,
+    timeout: 2000,
+    transitions: [
+        {
+            name: 'none',
+            leave(data) {
+                let done = this.async();
 
-router.addRoute({
-	path: '/test',
-	name: 'test',
+                gsap.to(data.current.container, {
+                    duration: 0.4,
+                    autoAlpha: 0,
+                    onComplete: () => {
+                        done();
+                    },
+                });
+            },
+            enter(data) {
+                let done = this.async();
+                gsap.from(data.next.container, {
+                    duration: 0.4,
+                    autoAlpha: 0,
+                    onComplete: done,
+                });
+            },
+            appear() {
+            },
+        },
+        {
+            name: 'slide-enter[-index]',
+            appear() {
+            },
+        },
+    ],
+
+    views: [
+        {
+            namespace: 'index',
+        },
+    ],
 });
-
-router.start();
-
-export default router;
