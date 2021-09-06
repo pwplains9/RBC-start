@@ -1,128 +1,195 @@
-/* global трекер yaCounter с файла по установке аналитики yaCounter#######*/
+/* global yaCounter##### */ // установка трекера с файла аналитики
 
-import scrollDepth from 'scroll-depth';
-import router from './router'; // подключается с файла router.js
+import globals from './globals';
+import vars from "./helpers";
 
-const $window = $(window);
-const $document = $(document);
+const clienLinks = [''];
+
+function clearText(text) {
+    return text.toString().trim().replace(/\s+/g, ' ');
+}
+
+function isClientLink(href) {
+    let value = false;
+
+    clienLinks.forEach((link) => {
+        if (href.indexOf(link) >= 0) {
+            value = true;
+        }
+    });
+
+    return value;
+}
 
 function spentOnPage15sec() {
-	clearTimeout($window.data('timeout15Sec'));
+    clearTimeout(globals.$window.data('timeout15Sec'));
 
-	$window.data('timeout15Sec', setTimeout(() => {
-		ga('rbcspec.send', 'event', 'page', 'spent_on_page_15_sec');
-		ga('send', 'event', 'page', 'spent_on_page_15_sec');
-	}, 15000));
+    globals.$window.data('timeout15Sec', setTimeout(() => {
+        ga('rbcspec.send', 'event', 'page', 'spent_on_page_15_sec');
+        ga('send', 'event', 'page', 'spent_on_page_15_sec');
+    }, 10000));
 }
 
 function virtualHit(path) {
-	if (window.ga) {
-		ga('set', 'page', path);
-		ga('send', 'pageview', path);
-		ga('rbcspec.set', 'page', path);
-		ga('rbcspec.send', 'pageview', path);
-	}
+    if (window.ga) {
+        ga('set', 'page', path);
+        ga('send', 'pageview', path);
+        ga('rbcspec.set', 'page', path);
+        ga('rbcspec.send', 'pageview', path);
+    }
 
-	if (window.yaCounter#######) {
-		yaCounter#######.hit(path);
-	}
+    if (window.yaCounter######) {
+        yaCounter#######.hit(path);// установка трекера с файла аналитики
+    }
 }
 
-function clearText(text) {
-	return text.toString().trim().replace(/\s+/, ' '); // функция для чистки текста от пробелов и прочего мусора.
-}
+vars.$document.on('page-enter', (e, namespace) => {
+    if (namespace) {
+        virtualHit(window.location.pathname + window.location.hash + location.search);
+    }
+});
 
 jQuery.scrollDepth({
-	userTiming: false,
-	pixelDepth: false,
-	gtmOverride: true,
-	eventHandler(data) {
-		ga('send', 'event', data.eventCategory, data.eventAction, data.eventLabel, {nonInteraction: false});
-		ga('rbcspec.send', 'event', data.eventCategory, data.eventAction, data.eventLabel, {nonInteraction: false});
-	},
+    userTiming: false,
+    pixelDepth: false,
+    gtmOverride: true,
+    eventHandler(data) {
+        ga('send', 'event', data.eventCategory, data.eventAction, data.eventLabel, {nonInteraction: false});
+        ga('rbcspec.send', 'event', data.eventCategory, data.eventAction, data.eventLabel, {nonInteraction: false});
+    },
 });
 
-router.on('enter', (prevState, currentState) => {
-	return new Promise((resolve) => {
-		spentOnPage15sec();
+function init() {
+    const $showOnScrollElements = $('.cards__item, .cards__banner, .js-banner'); 
 
-		if (prevState.route && currentState.route) {
-			virtualHit(currentState.route.generatePath({params: currentState.params}) + location.search);
+    const showElementsOnScroll = () => { // функция для обработки события элементров при попадении в viewport пользователя.
+        const scrollTop = vars.$window.scrollTop();
+        const scrollBottom = scrollTop + innerHeight;
 
-			scrollDepth.reset();
-		}
+        $showOnScrollElements
+            .filter(':visible')
+            .each((index, element) => {
+                const $element = $(element);
 
-		resolve();
-	});
-});
+                const elementOffsetTop = $element.offset().top;
+                const elementOffsetBottom = elementOffsetTop + $element.outerHeight();
 
-// common
+                if (scrollBottom >= elementOffsetTop && scrollTop <= elementOffsetBottom && !$element.data('showed')) {
+                    $element.data('showed', true);
 
-$('.header__partner').on('click', () => {
-	ga('send', 'event', 'client link', 'logo header');
-	ga('rbcspec.send', 'event', 'client link', 'click');
-});
 
-$('.header__rbc').on('click', () => {
-	ga('send', 'event', 'nav', 'rbc logo');
-});
+                    console.log($element)
 
-$document.on('slider-change', () => {
-	ga('send', 'event', 'article', 'slider change');
-});
+                    if ($element.hasClass('cards__item')) {
+                        const num = clearText($element.find('.cards__number').text());
 
-$('.element').on('click', (event) => { // пример обработки события клика
-	const $this = $(e.currentTarget); // получаем элемент клика
-	ga('send', 'event', 'event', 'событие с аналитики', clearText($this.text())); // передаем текст в событие
-})
+                        ga('send', 'event', 'cards', 'show', num, {nonInteraction: true});
+                    } else if ($element.hasClass('cards__banner')) {
+                        ga('send', 'event', 'banner', 'show', 'bottom banner', {nonInteraction: true});
+                    } else if ($element.hasClass('js-banner')) {
+                        const type = clearText($element.data('type'));
 
-// test
+                        ga('send', 'event', 'banner', 'show', `${type} banner`, {nonInteraction: true});
+                    }
+                }
+            });
+    };
+	
+    $showOnScrollElements.data('showed', false);
 
-$document
-	.on('test-start', () => {
-		ga('send', 'event', 'test', 'start');
-		ga('rbcspec.send', 'event', 'test', 'start');
-	})
-	.on('test-question-show', (e, num, name) => {
-		name = clearText(name).substr(0, 100);
+    vars.$window.on('scroll', showElementsOnScroll);
 
-		ga('send', 'event', 'test', `question show ${clearText(num)}`, name);
-	})
-	.on('test-answer', (e, num, name) => {
-		name = clearText(name).substr(0, 100);
+    $('.header__partner').on('click', () => {
+        ga('send', 'event', 'client link', 'logo header');
+        ga('rbcspec.send', 'event', 'client link', 'click');
+    });
 
-		ga('send', 'event', 'test', `question answer ${clearText(num)}`, name);
-	})
-	.on('test-result', (e, result, count) => {
-		ga('send', 'event', 'test', 'finish', clearText(result), count);
-		ga('rbcspec.send', 'event', 'test', 'finish', result);
-	})
-	.on('test-reload', () => {
-		ga('send', 'event', 'test', 'resume');
-	});
+    $('.header__logo').on('click', () => {
+        ga('send', 'event', 'nav', 'rbc logo');
+    });
 
-export const checkBanner = () => {
-	let $banners = $('.js-banner');
+    $('.header__container a:not(.header__partner):not(.header__logo)').on('click', () => {
+        ga('send', 'event', 'nav', 'rbc topline link');
+    })
 
-	$banners.each((i, banner) => {
-		let $banner = $(banner);
+    $('.article__text a, .article__subtitle a, .article__special a, .article__insert a, .article__people a').on('click', (e) => { // пример функции для обработки кликов по ссылкам (на клиента и на посторонние)
+        const name = clearText(e.currentTarget.textContent);
 
-		let bannerTop = $banner.offset().top;
-		let bannerHeight = $banner.height();
+        if (isClientLink(e.currentTarget.getAttribute('href'))) {
+            ga('send', 'event', 'client link', 'article text link', name);
+            ga('rbcspec.send', 'event', 'client link', 'click');
+        } else {
+            ga('send', 'event', 'article', 'text link', name);
+        }
+    });
 
-		let scrollTop = window.pageYOffset;
-		let scrollTopHeight = scrollTop + window.innerHeight;
+    $('.article__read-also .read-also__item').on('click', (e) => {
+        const name = clearText($(e.currentTarget).find('.read-also__subtitle').text());
+        const type = $(e.currentTarget).closest('.article__read-also').hasClass('article__read-also--vertical') ? 'right' : 'bottom';
 
-		if (scrollTopHeight >= bannerTop && bannerTop + bannerHeight >= scrollTop && !$banner.hasClass('isShown') && bannerTop !== 0) {
-			$banner.addClass('isShown');
+        ga('send', 'event', 'article', `see also ${type}`, name);
+    });
 
-			let type = $banner.data('type')
+    $('.article__social .social__item').on('click', (e) => {
+        const name = clearText(e.currentTarget.dataset.social);
 
-			ga('send', 'event', 'banner', 'show', type, {nonInteraction: true});
-		}
-	});
+        ga('send', 'event', 'share', 'article share', name);
+    });
+
+    $('.cards__banner, .js-banner').on('click', (e) => {
+        const type = clearText($(e.currentTarget).hasClass('cards__banner') ? 'bottom' : $(e.currentTarget).data('type'));
+
+        ga('send', 'event', 'client link', 'banner click', `${type} banner`);
+        ga('rbcspec.send', 'event', 'client link', 'click');
+    });
+
+    $('.footer .social__item, .test__share .social__item').on('click', (e) => {
+        const name = clearText(e.currentTarget.dataset.social);
+
+        ga('send', 'event', 'share', 'project share', name);
+    });
+
+
+    $('.test__controls .social__item').on('click', (e) => {
+        let name = $(e.currentTarget).data('social');
+
+        ga("send", "event", "share", "test final share", name);
+    });
+
+    $('.test__caption a').on('click', (e) => {
+        let name = $(e.currentTarget).text();
+
+        let stepQuestion = $(e.currentTarget).closest('.test__step').find('.test__question').text();
+
+        ga("send", "event", "client link", "test answer text link", `${stepQuestion} - ${name}`);
+
+        ga("rbcspec.send", "event", "client link", "click");
+    });
+
+    $('.test__radio').on('click', (e) => {
+        let name = $(e.currentTarget).text();
+        let stepIndex = $(e.currentTarget).closest('.test__step').find('.test__current').text();
+        ga("send", "event", "test", `question answer ${clearText(stepIndex)}`, clearText(name));
+    });
+
+    vars.$document.on('test-start', () => { // события теста
+        ga("send", "event", "test", "start");
+        ga("rbcspec.send", "event", "test", "start");
+    }).on('test-question-show', (e, stepIndex, question) => {
+        ga("send", "event", "test", `question show ${stepIndex}`, clearText(question), {nonInteraction: true});
+    }).on('test-result', (e, result, count) => {
+        ga("send", "event", "test", "finish", result, count);
+        ga("rbcspec.send", "event", "test", "finish", "result");
+    })
+        .on('test-reload', () => {
+            ga("send", "event", "test", "resume");
+        })
+        .on('slider-change', () => {
+            ga("send", "event", "article", "slider change");
+        });
+}
+
+export default {
+    spentOnPage15sec,
+    init,
 };
-
-$(window).on('resize scroll', () => {
-	checkBanner();
-});
