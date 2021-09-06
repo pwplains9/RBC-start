@@ -1,4 +1,4 @@
-/* global barba, barbaRouter, videojs */
+/* global barba, barbaRouter */
 /* globals scrollDepth */
 import vars from './helpers';
 import analytics from './analytics'; // находится в папке analytics 
