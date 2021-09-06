@@ -38,7 +38,8 @@ git push -u origin master
 
 # Routers
 
-Для начала работы с пакет роутинга.
+Для начала работы с пакет 
+а.
 <br>
 Потребудется:
 <br>
@@ -61,6 +62,7 @@ window.barba = barba;
 window.barbaRouter = barbaRouter;
 <br>
 <b>4)</b> Добавляем в base.scss
+<br>
 .page-container {
 <br>
 position: absolute;
