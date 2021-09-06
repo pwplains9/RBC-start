@@ -42,81 +42,47 @@ git push -u origin master
 <br>
 Потребудется:
 <br>
-<b>1)</b> Установить с помощью команды роутинг <b>npm install --save ninelines-router</b>
+<b>1)</b> Установить с помощью команды роутинг <b>npm install --save @barba/core</b>
 <br>
 <b>2)</b> Установить с помощью команды пакет анимаций GSAP <b>npm install --save gsap</b>
 <br>
-<b>3)</b> В проекте шаблона найти файл <b>vendor.js</b> и подключить глобально GSAP
+<b>3)</b> В проекте шаблона найти файл <b>vendor.js</b> и подключить глобально GSAP \ barba
 
 import gsap from 'gsap';
 <br>
+import barba from '@barba/core';
+<br>
+import barbaRouter from '@barba/router';
+<br>
 window.gsap = gsap;
-
 <br>
-<b>4)</b> В папке routers можно найти <b>animations.js</b> в котором есть 2 функции анимации.
+window.barba = barba;
 <br>
-enter/leave они отвечают за переходы между страницами.
+window.barbaRouter = barbaRouter;
 <br>
-В каждой из этих функций нужно инициализировать\убирать функции которые относятся к нужным страницам.
-
-<hr>
-<b>page</b> - это страница которую получает функция из роутера (файл router.js)
+<b>4)</b> Добавляем в base.scss
+.page-container {
 <br>
-if (page === 'article') {
+position: absolute;
 <br>
-} else if (page === 'details') {
+left: 0;
 <br>
-} else if (page === 'test') {
+right: 0;
 <br>
-}
-<br>
-if (<b>num</b>) {
-<br>
-$page = $(`[data-page="${page}-${num}"]`);
+top: 0;
 <br>
 }
 <br>
-В этом примере показывается создание страниц с вложенной категорией.
-
-<hr>
-<b>Пример страницы:</b>
+Эти стили нужны, для фикса плавности анимации, при переходе между страницами.
 <br>
-.article(data-page="<b>article</b>") // если страница 1 - site.ru/article
+<b>5)</b> Ищем файл в папке routers / index-template.pug, в нем прописан пример создания страницы.
 <br>
-.article(data-page="<b>article-1</b>") // если есть вложенные страницы категории  - site.ru/article/1
-<hr>
-
-Для перехода по роутингу в ссылки, добавляем дата-атрибут - <b>data-router-link</b>
+<b>6)</b> Ищем файл в папке routers / router.js берем его и добавляем в проект, подключаем его в <b>main.js</b>
 <br>
-<b>5)</b> В файле <b>router.js</b> находится сам роутер.
-<br>
-Для добавления роутера для нужной страницы, используем такую конструкцию:
-<br>
-router.addRoute({
-<br>
-path: '/article',
-<br>
-name: 'article',
-<br>
-});
-<br>
-<b>path</b> - url путь.
-<br>
-<b>name</b> - название страницы "класс самой страницы".
-<br>
-Для создния страниц с вложенностями:
-<br>
-router.addRoute({
-<br>
-path: '/article/:id',
-<br>
-name: 'article',
-<br>
-});
-
+<b>7)</b> Описание работы смотреть в файле router.js
 <hr>
 
-Документация Роутинг <a href="https://github.com/ninelines-team/ninelines-router" target="_blank"> клик сюда</a>.
+Документация Роутинг <a href="https://barba.js.org/docs/getstarted/install/" target="_blank"> клик сюда</a>.
 <br>
 Документация по анимациям GSAP <a href="https://greensock.com/gsap/" target="_blank">клик сюда</a>.
 <hr>
