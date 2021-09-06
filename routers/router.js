@@ -1,7 +1,7 @@
 /* global barba, barbaRouter, videojs */
 /* globals scrollDepth */
 import vars from './helpers';
-import analytics from './analytics';
+import analytics from './analytics'; // находится в папке analytics 
 import lazyLoading from "./components/lazyLoading";
 import share from "./components/share";
 import menu from "./components/header";
