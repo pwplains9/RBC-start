@@ -2,14 +2,10 @@
 
 $protocol = $_SERVER['PROTOCOL'] = isset($_SERVER['HTTPS']) && !empty($_SERVER['HTTPS']) ? 'https' : 'http';
 $host = $protocol . '://' . $_SERVER['HTTP_HOST'];
-$title = 'Как бизнес устроил перезагрузку.';
-$description = 'Рассказываем с ASUS истории успешного рестарта';
+$title = '#';
+$description = '#';
 $image = $host . '/images/share/' . @$_GET['image'] . '.jpg';
-$redirect = $host . '/game.html';
-
-$pages = [
-
-];
+$redirect = $host . '/';
 
 $page = @$pages[$_GET['page']];
 
