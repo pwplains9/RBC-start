@@ -1,0 +1,15 @@
+mixin lazyBlure(data)
+    figure.lazyBlure
+        .lazy-blur
+            div.lazy-blur__padding(style=`padding-bottom: ${data.imgRatio}`)
+                // imgRatio, img-width / img-height, unit: %
+                // lazy-blur__imgS__placeholder
+            img.lazy-blur__imgS(src=`${data.imgS}` data-src=`${data.imgL}`)
+            noscript
+                img(src=`${data.imgL}`)
+
+//+lazyBlure({ - пример миксина
+//    imgRatio: '66%',
+//    imgS: '../images/share/main-xs.jpg',
+//    imgL: '../images/share/main.jpg',
+//})
