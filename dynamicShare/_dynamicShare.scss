@@ -1,0 +1,9 @@
+.share-container {
+	position: fixed;
+	left: 50%;
+	top: 0;
+	z-index: -10000;
+	width: 1366px;
+	transform: translateX(-50%);
+	pointer-events: none;
+}
