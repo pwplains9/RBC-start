@@ -2,10 +2,14 @@
 
 $protocol = $_SERVER['PROTOCOL'] = isset($_SERVER['HTTPS']) && !empty($_SERVER['HTTPS']) ? 'https' : 'http';
 $host = $protocol . '://' . $_SERVER['HTTP_HOST'];
-$title = '#';
-$description = '#';
-$image = $host . '/images/share/' . @$_GET['image'] . '.jpg';
+$title = 'Тест';
+$description = 'Тест';
+$image = $host . '';
 $redirect = $host . '/';
+
+$pages = [
+
+];
 
 $page = @$pages[$_GET['page']];
 
@@ -14,6 +18,12 @@ if ($page) {
 	$description = !is_null(@$page['description']) ? $page['description'] : $description;
 	$image = !is_null(@$page['image']) ? $page['image'] : $image;
 	$redirect = !is_null(@$page['redirect']) ? $page['redirect'] : "/{$_GET['page']}";
+}
+
+if ($_GET['page'] == 'result')
+{
+    $image = '/posters/' . @$_GET['image'] . '.png';
+    $redirect = '/';
 }
 ?><!doctype html>
 <html lang="ru">
