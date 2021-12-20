@@ -13,8 +13,8 @@ const init = () => {
 				let options = $.extend({
 					url: location.href,
 					title: document.title,
-					image: vars.$document.find('meta[property="og:image"]').attr('content'), // Заполняем шеринг на странице .html
-					text: document.querySelector('meta[name="description"]').content,
+					image: vars.$document.find('meta[property="og:image"]').attr('content'), // Заполняем url картинки на странице .html
+					text: document.querySelector('meta[name="description"]').content, 
 				});
 
 				let urlImage = location.origin + options.image;
