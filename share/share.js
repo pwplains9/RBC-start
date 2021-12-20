@@ -14,7 +14,7 @@ const init = () => {
 					url: location.href,
 					title: document.title,
 					image: vars.$document.find('meta[property="og:image"]').attr('content'), // Заполняем url картинки на странице .html
-					text: document.querySelector('meta[name="description"]').content, 
+					text: vars.$document.find('meta[name="description"]').text(), 
 				});
 
 				let urlImage = location.origin + options.image;
