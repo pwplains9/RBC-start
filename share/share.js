@@ -12,12 +12,10 @@ const init = () => {
 
 				let options = $.extend({
 					url: location.href,
-					title: document.title,
+					title: vars.$document.find('title').text(),
 					image: vars.$document.find('meta[property="og:image"]').attr('content'), // Заполняем url картинки на странице .html
-					text: vars.$document.find('[property="og:description"]').attr('content'), 
+					description: vars.$document.find('meta[property="og:description"]').attr('content'),
 				});
-				
-				let titleTwitter = vars.$document.find('title').text();
 
 				let urlImage = location.origin + options.image;
 
@@ -26,14 +24,14 @@ const init = () => {
 				let urlVK = `${'http://vkontakte.ru/share.php?'
 				+ 'url='}${encodeURIComponent(options.url)}
 					&title=${encodeURIComponent(options.title)}
-					&description=${encodeURIComponent(options.text)}
+					&description=${encodeURIComponent(options.description)}
 					&image=${encodeURIComponent(urlImage)}
 					&noparse=true`;
 
 				shareWindow.location = {
 					facebook: `https://facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
 					vk: urlVK,
-					twitter: `http://twitter.com/intent/tweet?url=${location.origin}&ref_src=${location.origin + options.image}&text=${titleTwitter}`,
+					twitter: `http://twitter.com/intent/tweet?url=${location.origin}&ref_src=${location.origin + options.image}&text=${options.title}`,
 					ok: `https://connect.ok.ru/offer?url=${encodeURIComponent(url)}`,
 				}[social];
 			});
