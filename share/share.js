@@ -16,6 +16,8 @@ const init = () => {
 					image: vars.$document.find('meta[property="og:image"]').attr('content'), // Заполняем url картинки на странице .html
 					text: vars.$document.find('[property="og:description"]').attr('content'), 
 				});
+				
+				let titleTwitter = vars.$document.find('title').text();
 
 				let urlImage = location.origin + options.image;
 
@@ -31,7 +33,7 @@ const init = () => {
 				shareWindow.location = {
 					facebook: `https://facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
 					vk: urlVK,
-					twitter: `http://twitter.com/share?url=${encodeURIComponent(url)}`,
+					twitter: `http://twitter.com/intent/tweet?url=${location.origin}&ref_src=${location.origin + options.image}&text=${titleTwitter}`,
 					ok: `https://connect.ok.ru/offer?url=${encodeURIComponent(url)}`,
 				}[social];
 			});
